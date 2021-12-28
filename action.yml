@@ -1,0 +1,26 @@
+name: 'Catho node custom action'
+description: 'Action to start action node jobs'
+
+inputs:
+  npm-token:
+    description: 'NPM Token to create .npmrc file'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Create .npmrc
+      if: ${{ inputs.npm-token != '' }}
+      run: ./npm-login.sh ${{ inputs.npm-token }}
+
+    - name: Install dependencies
+      run: npm install
