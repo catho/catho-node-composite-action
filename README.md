@@ -10,3 +10,48 @@ Instead to write 4 or 5 steps in every jobs of your pipeline you cand just use t
  - does application checkout using `actions/checkout@v2`;
  - create a `.npmrc` file in case you pass `npm-token` parameter;
  - run `npm install`.
+
+## Inputs
+ - `npm-token`: Used to create `.npmrc` file in case you have some private dependency
+
+## Outputs
+There no outputs yet.
+
+## How to use
+
+```yaml
+name: Some API
+
+on: [push]
+
+jobs:
+  linter:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Setup application
+        uses: catho/catho-node-composite-action@v1
+        with:
+          npm-token: you npm token
+
+      - name: Run linter
+        run: npm run lint
+
+  tests:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Setup application
+        uses: catho/catho-node-composite-action@v1
+
+      - name: Run all tests
+        run: npm run test
+```
