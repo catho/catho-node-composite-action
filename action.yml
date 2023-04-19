@@ -9,7 +9,7 @@ inputs:
   working-directory:
     description: "Working directory"
     required: false
-    default: "./"
+    default: ./
 
 default:
   run:
