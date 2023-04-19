@@ -11,9 +11,9 @@ inputs:
     required: false
     default: ./
 
-default:
+defaults:
   run:
-    working-directory: inputs.working-directory
+    working-directory: ${{ inputs.working-directory }}
 
 runs:
   using: "composite"
