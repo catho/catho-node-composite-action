@@ -1,20 +1,28 @@
-name: 'Catho node custom action'
-description: 'Action to start action node jobs'
+name: "Catho node custom action"
+description: "Action to start action node jobs"
 
 inputs:
   npm-token:
-    description: 'NPM Token to create .npmrc file'
+    description: "NPM Token to create .npmrc file"
     required: false
-    default: ''
+    default: ""
+  working-directory:
+    description: "Working directory"
+    required: false
+    default: "./"
+
+default:
+  run:
+    working-directory: inputs.working-directory
 
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - run: touch .npmrc
       shell: bash
