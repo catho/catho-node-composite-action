@@ -11,10 +11,6 @@ inputs:
     required: false
     default: ./
 
-defaults:
-  run:
-    working-directory: ${{ inputs.working-directory }}
-
 runs:
   using: "composite"
   steps:
@@ -26,10 +22,14 @@ runs:
 
     - run: touch .npmrc
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - run: echo "//registry.npmjs.org/:_authToken=${{ inputs.npm-token }}" >> ./.npmrc
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       if: ${{ inputs.npm-token != '' }}
 
     - run: npm install
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
