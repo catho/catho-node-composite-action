@@ -6,8 +6,8 @@ The jobs of github actions don't give support to reuse steps between them, so th
 Instead to write 4 or 5 steps in every jobs of your pipeline you cand just use this custom action.
 
 ## Featrues
- - use `actions/setup-node@v2`;
- - does application checkout using `actions/checkout@v2`;
+ - use `actions/setup-node@v3`;
+ - does application checkout using `actions/checkout@v3`;
  - create a `.npmrc` file in case you pass `npm-token` parameter;
  - run `npm install`.
 
@@ -37,6 +37,7 @@ jobs:
         uses: catho/catho-node-composite-action@v2
         with:
           npm-token: you npm token
+          working-directory: ./
 
       - name: Run linter
         run: npm run lint
